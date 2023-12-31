@@ -1,0 +1,1 @@
+New-Item -ItemType SymbolicLink -Target $env:userprofile\.dotfiles\.glaze-wm -Path $env:userprofile\.glaze-wm
