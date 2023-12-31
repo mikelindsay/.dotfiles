@@ -8,6 +8,6 @@ popd
 
 $linkExists = Test-Path $env:userprofile\.glaze-wm
 If (-not $linkExists) {
-	Test-Path New-Item -ItemType SymbolicLink -Target $env:userprofile\.dotfiles\.glaze-wm -Path $env:userprofile\.glaze-wm
+	New-Item -ItemType SymbolicLink -Target $env:userprofile\.dotfiles\.glaze-wm -Path $env:userprofile\.glaze-wm
 }
 winget install GlazeWM
