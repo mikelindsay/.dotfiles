@@ -6,3 +6,8 @@ sudo apt-get install firefox
 sudo apt-get install git
 
 git clone git@github.com:mikelindsay/.dotfiles.git ~/.dotfiles
+
+pushd .
+cd ~/.dotfiles
+git pull
+popd
