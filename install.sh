@@ -5,4 +5,4 @@ sudo apt-get install stow
 sudo apt-get install firefox
 sudo apt-get install git
 
-git clone https://github.com/mikelindsay/.dotfiles.git ~/.dotfiles
+git clone git@github.com:mikelindsay/.dotfiles.git ~/.dotfiles
