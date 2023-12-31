@@ -1,9 +1,9 @@
 #!/bin/bash
 echo "Building environment"
-sudo apt-get -y install i3
-sudo apt-get -y install stow
-sudo apt-get -y install firefox
-sudo apt-get -y install git
+sudo apt-get --yes --force-yes install i3
+sudo apt-get --yes --force-yes install stow
+sudo apt-get --yes --force-yes install firefox
+sudo apt-get --yes --force-yes install git
 
 URL=git@github.com:mikelindsay/.dotfiles.git
 FOLDER=~/.dotfiles
