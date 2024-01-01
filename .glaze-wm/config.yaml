@@ -43,19 +43,19 @@ general:
 
 workspaces:
   - name: 1
-    display_name: "1 - Firefox"
+    display_name: "1:firefox"
     keep_alive: true
   - name: 2
-    display_name: "2 - Slack"
+    display_name: "2:chat"
     keep_alive: true
   - name: 3
-    display_name: "3 - VS Code"
+    display_name: "3:code"
     keep_alive: true
   - name: 4
-    display_name: "4 - Chrome"
+    display_name: "4:chrome"
     keep_alive: true
   - name: 5
-    display_name: "5 - Other"
+    display_name: "5:other"
     keep_alive: true
   - name: 6
   - name: 7
@@ -77,29 +77,23 @@ window_rules:
     match_process_name: "steam"
     
   # Firefox always in workspace 1
-  - command: "move to workspace 1"
-    match_process_name: "firefox"
-
-  - command: "focus workspace 1"
+  - commands: ["move to workspace 1", "focus workspace 1"]
     match_process_name: "firefox"
 
   # slack always in workspace 2
-  - command: "move to workspace 2"
-    match_process_name: "slack"
-
-  - command: "focus workspace 2"
-    match_process_name: "slack"
+  - commands: ["move to workspace 2", "focus workspace 2"]
+    match_process_name: "/slack|Discord/"
 
   # code always in workspace 3
   - commands: ["move to workspace 3", "focus workspace 3"]
-    match_process_name: "Code"
+    match_process_name: "/Code|WindowsTerminal/"
 
   # chrome always in workspace 4
   - commands: ["move to workspace 4", "focus workspace 4"]
     match_process_name: "chrome"
 
   - commands: ["move to workspace 5", "focus workspace 5"]
-    match_process_name: "^(?!.*(?:Taskmgr|ScreenClippingHost|chrome|Code|slack|firefox|TestApp123)).*$"
+    match_process_name: "^(?!.*(?:Taskmgr|ScreenClippingHost|chrome|Code|slack|Discord|WindowsTerminal|firefox|TestApp123)).*$"
   
   # chrome always in workspace 4
   - commands: ["move to workspace 9", "focus workspace 9"]
