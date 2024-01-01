@@ -1,2 +1,3 @@
 set relativenumber
-set scrolloff=999999
+set scrolloff=99999
+set nowrap9
