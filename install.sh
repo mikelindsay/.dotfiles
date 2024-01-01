@@ -50,12 +50,12 @@ for file in ~/.dotfiles/.config/*; do
             echo "Symbolic link for $target already exists. Skipping."
         else
             # If a regular file exists with the same name, remove it
-            if [ -f "$target" ]; then
+          #  if [ -f "$target" ]; then
                 if [[ $$basename != ".config" ]]; then
                     echo "Removing existing file: $target"
                     rm "$target" -f -r
                 fi
-            fi
+           # fi
 
             # Create a symbolic link
             echo "Creating symbolic link for $file $target"
