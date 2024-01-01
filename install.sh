@@ -1,9 +1,12 @@
 #!/bin/bash
 echo "Building environment"
-sudo apt-get --yes --force-yes install i3
-sudo apt-get --yes --force-yes install stow
-sudo apt-get --yes --force-yes install firefox
-sudo apt-get --yes --force-yes install git
+sudo add-apt-repository ppa:neovim-ppa/stable
+sudo apt-get update
+sudo apt-get --yes --allow install i3
+sudo apt-get --yes --allow install stow
+sudo apt-get --yes --allow install firefox
+sudo apt-get --yes --allow install git
+sudo apt-get --yes --allow install neovim
 
 URL=git@github.com:mikelindsay/.dotfiles.git
 FOLDER=~/.dotfiles
