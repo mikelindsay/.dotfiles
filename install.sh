@@ -41,7 +41,7 @@ done
 
 for file in ~/.dotfiles/.config/*; do
     basename=$(basename "$file")
-    target="$HOME/$basename"
+    target="$HOME/.config/$basename"
 
     # Exclude specific filenames
     if [[ $basename != "." && $basename != ".." && $basename != ".git" && $basename != ".gitignore" ]]; then
