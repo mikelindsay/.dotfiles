@@ -15,51 +15,74 @@ else
     git pull $URL
 fi
 
-# Create symbolic links
+# Function to create symbolic links
+create_symlink() {
+    local file=$1
+    local target=$2
+
+    # Check if a symbolic link already exists
+    if [ -L "$target" ]; then
+        echo "Symbolic link for $target already exists. Skipping."
+    else
+        # Get the basename of the target
+        local target_basename=$(basename "$target")
+
+        # Check if the target basename is in the exclude base folders list
+        local exclude=false
+        for excluded_folder in "${exclude_base_folders_to_remove[@]}"; do
+            if [[ "$target_basename" == "$excluded_folder" ]]; then
+                exclude=true
+                break
+            fi
+        done
+
+        # If a regular file or directory exists with the same name and it's not in the exclude list, remove it
+        if [[ -e "$target" && "$exclude" == false ]]; then
+            echo "Removing existing file: $target"
+            rm -f -r "$target"
+        fi
+
+        # Create a symbolic link
+        if [[ "$exclude" == false ]]; then
+            echo "Creating symbolic link for $file to $target"
+            ln -s "$file" "$target"
+        fi
+    fi
+}
+
+# Array of base folder names to exclude from removal
+exclude_base_folders_to_remove=(".config")
+
+# Array of filenames to exclude
+exclude_files=(".git" ".gitignore" "." "..")
+
+# Function to check if a file is in the exclude list
+is_excluded() {
+    local file=$1
+    for excluded in "${exclude_files[@]}"; do
+        if [[ $file == $excluded ]]; then
+            return 0
+        fi
+    done
+    return 1
+}
+
+# Create symbolic links for dotfiles in the home directory
 for file in ~/.dotfiles/.*; do
     basename=$(basename "$file")
     target="$HOME/$basename"
 
-    # Exclude specific filenames
-    if [[ $basename != "." && $basename != ".." && $basename != ".git" && $basename != ".gitignore" ]]; then
-        # Check if a symbolic link already exists
-        if [ -L "$target" ]; then
-            echo "Symbolic link for $target already exists. Skipping."
-        else
-            # If a regular file exists with the same name, remove it
-            if [ -f "$target" ]; then
-                echo "Removing existing file: $target"
-                rm "$target"
-            fi
-
-            # Create a symbolic link
-            echo "Creating symbolic link for $file"
-            ln -s "$file" "$target"
-        fi
+    if ! is_excluded "$basename"; then
+        create_symlink "$file" "$target"
     fi
 done
 
+# Create symbolic links for files in the .config directory
 for file in ~/.dotfiles/.config/*; do
     basename=$(basename "$file")
     target="$HOME/.config/$basename"
 
-    # Exclude specific filenames
-    if [[ $basename != "." && $basename != ".." && $basename != ".git" && $basename != ".gitignore" ]]; then
-        # Check if a symbolic link already exists
-        if [ -L "$target" ]; then
-            echo "Symbolic link for $target already exists. Skipping."
-        else
-            # If a regular file exists with the same name, remove it
-          #  if [ -f "$target" ]; then
-                if [[ $$basename != ".config" ]]; then
-                    echo "Removing existing file: $target"
-                    rm "$target" -f -r
-                fi
-           # fi
-
-            # Create a symbolic link
-            echo "Creating symbolic link for $file $target"
-            ln -s "$file" "$target"
-        fi
+    if ! is_excluded "$basename"; then
+        create_symlink "$file" "$target"
     fi
 done
