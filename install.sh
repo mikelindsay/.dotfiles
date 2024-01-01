@@ -58,7 +58,7 @@ for file in ~/.dotfiles/.config/*; do
             fi
 
             # Create a symbolic link
-            echo "Creating symbolic link for $file"
+            echo "Creating symbolic link for $file $target"
             ln -s "$file" "$target"
         fi
     fi
