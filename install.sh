@@ -19,37 +19,51 @@ else
 fi
 
 # Function to create symbolic links
+# Function to create symbolic links
 create_symlink() {
     local file=$1
     local target=$2
 
+    # Avoid creating a symlink if the target and source are the same
+    if [[ "$file" -ef "$target" ]]; then
+        echo "Skipping: Source and target are the same for $file"
+        return
+    fi
+
+    # Check if the target is a symlink that points to the source
+    if [[ -L "$target" && "$(readlink -f "$target")" == "$file" ]]; then
+        echo "Skipping: $target is a symlink to $file"
+        return
+    fi
+
     # Check if a symbolic link already exists
     if [ -L "$target" ]; then
         echo "Symbolic link for $target already exists. Skipping."
-    else
-        # Get the basename of the target
-        local target_basename=$(basename "$target")
+        return
+    fi
 
-        # Check if the target basename is in the exclude base folders list
-        local exclude=false
-        for excluded_folder in "${exclude_base_folders_to_remove[@]}"; do
-            if [[ "$target_basename" == "$excluded_folder" ]]; then
-                exclude=true
-                break
-            fi
-        done
+    # Get the basename of the target
+    local target_basename=$(basename "$target")
 
-        # If a regular file or directory exists with the same name and it's not in the exclude list, remove it
-        if [[ -e "$target" && "$exclude" == false ]]; then
-            echo "Removing existing file: $target"
-            rm -f -r "$target"
+    # Check if the target basename is in the exclude base folders list
+    local exclude=false
+    for excluded_folder in "${exclude_base_folders_to_remove[@]}"; do
+        if [[ "$target_basename" == "$excluded_folder" ]]; then
+            exclude=true
+            break
         fi
+    done
 
-        # Create a symbolic link
-        if [[ "$exclude" == false ]]; then
-            echo "Creating symbolic link for $file to $target"
-            ln -s "$file" "$target"
-        fi
+    # If a regular file or directory exists with the same name and it's not in the exclude list, remove it
+    if [[ -e "$target" && "$exclude" == false ]]; then
+        echo "Removing existing file: $target"
+        rm -f -r "$target"
+    fi
+
+    # Create a symbolic link
+    if [[ "$exclude" == false ]]; then
+        echo "Creating symbolic link for $file to $target"
+        ln -s "$file" "$target"
     fi
 }
 
