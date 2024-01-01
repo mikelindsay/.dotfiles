@@ -41,7 +41,7 @@ done
 
 for file in ~/.dotfiles/.config/*; do
     basename=$(basename "$file")
-    target="$HOME/.config/$basename"
+    target="$HOME/$basename"
 
     # Exclude specific filenames
     if [[ $basename != "." && $basename != ".." && $basename != ".git" && $basename != ".gitignore" ]]; then
@@ -51,8 +51,10 @@ for file in ~/.dotfiles/.config/*; do
         else
             # If a regular file exists with the same name, remove it
             if [ -f "$target" ]; then
-                echo "Removing existing file: $target"
-                rm "$target" -f -r
+                if [[ $$basename != ".config" ]]; then
+                    echo "Removing existing file: $target"
+                    rm "$target" -f -r
+                fi
             fi
 
             # Create a symbolic link
