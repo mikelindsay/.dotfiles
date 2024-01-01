@@ -1,6 +1,6 @@
 #!/bin/bash
 echo "Building environment"
-sudo add-apt-repository ppa:neovim-ppa/stable
+sudo add-apt-repository -y ppa:neovim-ppa/stable
 sudo apt-get update
 sudo apt-get --yes --force-yes install i3
 sudo apt-get --yes --force-yes install stow
