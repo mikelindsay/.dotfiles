@@ -103,3 +103,12 @@ for file in ~/.dotfiles/.config/*; do
         create_symlink "$file" "$target"
     fi
 done
+
+
+# Vim (~/.vim/autoload)
+curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+
+# Neovim (~/.local/share/nvim/site/autoload)
+curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
+    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
