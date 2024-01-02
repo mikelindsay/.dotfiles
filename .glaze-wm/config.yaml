@@ -52,11 +52,9 @@ workspaces:
     display_name: "3:code"
     keep_alive: true
   - name: 4
-    display_name: "4:chrome"
+    display_name: "4:other"
     keep_alive: true
   - name: 5
-    display_name: "5:other"
-    keep_alive: true
   - name: 6
   - name: 7
   - name: 8
@@ -88,14 +86,10 @@ window_rules:
   - commands: ["move to workspace 3", "focus workspace 3"]
     match_process_name: "/Code|WindowsTerminal/"
 
-  # chrome always in workspace 4
-  - commands: ["move to workspace 4", "focus workspace 4"]
-    match_process_name: "chrome"
-
-  - commands: ["move to workspace 5", "focus workspace 5"]
-    match_process_name: "^(?!.*(?:Taskmgr|ScreenClippingHost|chrome|Code|slack|Discord|WindowsTerminal|firefox|TestApp123)).*$"
+  - commands: ["set floating", "move to workspace 4", "focus workspace 4"]
+    match_process_name: "^(?!.*(?:Taskmgr|ScreenClippingHost|Code|slack|Discord|WindowsTerminal|firefox|TestApp123)).*$"
   
-  # chrome always in workspace 4
+  # chrome always in workspace
   - commands: ["move to workspace 9", "focus workspace 9"]
     match_process_name: "TestApp123"
 keybindings:
