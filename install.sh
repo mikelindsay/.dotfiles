@@ -7,6 +7,7 @@ sudo apt-get --yes --force-yes install stow
 sudo apt-get --yes --force-yes install firefox
 sudo apt-get --yes --force-yes install git
 sudo apt-get --yes --force-yes install neovim
+sudo apt-get --yes --force-yes install ripgrep
 
 URL=git@github.com:mikelindsay/.dotfiles.git
 FOLDER=~/.dotfiles
