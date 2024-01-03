@@ -9,7 +9,9 @@ sudo apt-get --yes --force-yes install git
 sudo apt-get --yes --force-yes install neovim
 sudo apt-get --yes --force-yes install ripgrep
 sudo apt-get --yes --force-yes install zip
-
+sudo apt-get --yes --force-yes install nodejs
+sudo apt-get --yes --force-yes install npm
+sudo npm install -g --force node@latest
 # Install pre-requisite packages.
 sudo apt-get install --yes --force-yes wget apt-transport-https software-properties-common
 

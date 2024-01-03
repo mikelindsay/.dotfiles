@@ -34,8 +34,13 @@ require("mason-lspconfig").setup {
 local lspconfig = require('lspconfig')
 local lsp_capabilities = require('cmp_nvim_lsp').default_capabilities()
 
+require("copilot").setup({
+  suggestion = { enabled = false },
+  panel = { enabled = false },
+})
 
-  -- Set up nvim-cmp.
+--    require("copilot_cmp").setup()
+-- Set up nvim-cmp.
   local cmp = require'cmp'
 
   cmp.setup({
@@ -60,7 +65,8 @@ local lsp_capabilities = require('cmp_nvim_lsp').default_capabilities()
       ['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
     }),
     sources = cmp.config.sources({
-      { name = 'nvim_lsp' },
+    { name = 'copilot' },
+    { name = 'nvim_lsp' },
       { name = 'vsnip' }, -- For vsnip users.
       -- { name = 'luasnip' }, -- For luasnip users.
       -- { name = 'ultisnips' }, -- For ultisnips users.
