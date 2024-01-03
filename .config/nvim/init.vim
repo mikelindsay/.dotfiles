@@ -3,7 +3,9 @@ set nu rnu
 set scrolloff=99999
 set nowrap
 set clipboard+=unnamedplus
-
+set list
+set colorcolumn=80,130
+set cursorline
 " Plugins will be downloaded under the specified directory.
 call plug#begin(has('nvim') ? stdpath('data') . '/plugged' : '~/.vim/plugged')
 
