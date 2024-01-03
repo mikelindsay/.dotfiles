@@ -1,10 +1,10 @@
 winget install -e --id Git.Git
 git clone https://github.com/mikelindsay/.dotfiles.git $env:userprofile\.dotfiles
 
-pushd .
-cd $env:userprofile\.dotfiles
+Push-Location .
+Set-Location $env:userprofile\.dotfiles
 git pull
-popd
+Pop-Location
 
 $linkExists = Test-Path $env:userprofile\.glaze-wm
 If (-not $linkExists) {
