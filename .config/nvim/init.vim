@@ -17,8 +17,12 @@ Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.5' }
 Plug 'ThePrimeagen/harpoon', { 'branch': 'harpoon2' }
 Plug 'williamboman/mason.nvim'
 Plug 'williamboman/mason-lspconfig.nvim'
+
 Plug 'neovim/nvim-lspconfig'
 Plug 'hrsh7th/cmp-nvim-lsp'
+Plug 'hrsh7th/cmp-buffer'
+Plug 'hrsh7th/cmp-path'
+Plug 'hrsh7th/cmp-cmdline'
 Plug 'hrsh7th/nvim-cmp'
-" List ends here. Plugins become visible to Vim after this call.
+
 call plug#end()
