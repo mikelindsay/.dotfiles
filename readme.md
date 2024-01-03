@@ -9,3 +9,8 @@ Invoke-Expression $($ScriptFromGitHub.Content)
 sudo apt-get install curl
 curl https://raw.githubusercontent.com/mikelindsay/.dotfiles/master/install.sh | bash
 ```
+
+# Neovim
+```
+:Copilot auth signin
+```
