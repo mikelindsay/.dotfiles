@@ -16,7 +16,25 @@ vim.keymap.set("n", "<F4>", function() harpoon:list():select(4) end)
 -- Toggle previous & next buffers stored within Harpoon list
 vim.keymap.set("n", "<C-S-P>", function() harpoon:list():prev() end)
 vim.keymap.set("n", "<C-S-N>", function() harpoon:list():next() end)
+vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
 
+vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
+require("mason").setup()
+
+require("mason-lspconfig").setup {
+	ensure_installed = { "lua_ls", "powershell_es" },
+}
+
+local lspconfig = require('lspconfig')
+local lsp_capabilities = require('cmp_nvim_lsp').default_capabilities()
+
+lspconfig.lua_ls.setup({
+  capabilities = lsp_capabilities,
+  })
+
+lspconfig.powershell_es.setup({
+  capabilities = lsp_capabilities,
+})
 
 ---basic telescope configuration
 ---al conf = require("telescope.config").values
@@ -71,7 +89,7 @@ vim.keymap.set("n", "<C-S-N>", function() harpoon:list():next() end)
 ---         return true
 ---     end
 --- }):find()
---end
+---nd
 
---vim.keymap.set("n", "<C-e>", function() toggle_telescope(harpoon:list()) end,
+---im.keymap.set("n", "<C-e>", function() toggle_telescope(harpoon:list()) end,
 --    { desc = "Open harpoon window" })
