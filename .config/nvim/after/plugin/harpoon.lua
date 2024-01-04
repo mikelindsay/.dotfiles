@@ -28,12 +28,12 @@ require("mason-lspconfig").setup {
 
 
 
-require('lualine').setup({
-options = {
-	icons_enabled = false,
-	theme = 'onedark'
-}
-})
+-- require('lualine').setup({
+-- options = {
+-- 	icons_enabled = false,
+-- 	theme = 'onedark'
+-- }
+-- })
 
 
 local lspconfig = require('lspconfig')
@@ -73,18 +73,18 @@ experimental = { ghost_text = true, },
        documentation = cmp.config.window.bordered(),
     },
     mapping = cmp.mapping.preset.insert({
-      ['<C-b>'] = cmp.mapping.scroll_docs(-4),
+     ['<C-b>'] = cmp.mapping.scroll_docs(-4),
       ['<C-f>'] = cmp.mapping.scroll_docs(4),
       ['<C-Space>'] = cmp.mapping.complete(),
       ['<C-e>'] = cmp.mapping.abort(),
       ['<Tab>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
-          ["<CR>"] = vim.schedule_wrap(function(fallback)
-      if cmp.visible() and has_words_before() then
-        cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
-      else
-        fallback()
-      end
-    end),
+--          ["<CR>"] = vim.schedule_wrap(function(fallback)
+--      if cmp.visible() and has_words_before() then
+--        cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
+--      else
+--        fallback()
+--      end
+--    end),
    }),
     sources = cmp.config.sources({
     { name = 'copilot' },
