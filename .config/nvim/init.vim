@@ -6,7 +6,9 @@ set clipboard+=unnamedplus
 set list
 set colorcolumn=80,130
 set cursorline
-" Plugins will be downloaded under the specified directory.
+set signcolumn=yes
+set signcolumn=number
+"r Plugins will be downloaded under the specified directory.
 call plug#begin(has('nvim') ? stdpath('data') . '/plugged' : '~/.vim/plugged')
 
 Plug 'navarasu/onedark.nvim'
