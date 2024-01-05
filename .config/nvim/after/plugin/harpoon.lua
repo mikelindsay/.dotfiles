@@ -28,12 +28,12 @@ require("mason-lspconfig").setup {
 
 
 
--- require('lualine').setup({
--- options = {
--- 	icons_enabled = false,
--- 	theme = 'onedark'
--- }
--- })
+require('lualine').setup({
+options = {
+icons_enabled = false,
+theme = 'onedark'
+}
+})
 
 
 local lspconfig = require('lspconfig')
