@@ -5,4 +5,5 @@
 /.vs
 /.glaze-wm/errors.log
 *.swp
-
+/.local/share
+/.local/state
