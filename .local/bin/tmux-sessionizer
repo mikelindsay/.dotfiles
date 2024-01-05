@@ -1,0 +1,56 @@
+#!/usr/bin/env bash
+
+# Multiline directories array
+directories=(
+    ~/work/builds
+    ~/projects
+    ~/
+    ~/work
+    ~/personal
+    ~/personal/yt
+)
+
+# Check if directories exist and add them to a new array
+existing_directories=()
+for dir in "${directories[@]}"; do
+    if [ -d "$dir" ]; then
+        existing_directories+=("$dir")
+    fi
+done
+
+# Exit if no directories exist
+if [ ${#existing_directories[@]} -eq 0 ]; then
+    echo "No directories found."
+    exit 1
+fi
+
+# Construct find command with existing directories
+find_command="find ${existing_directories[*]} -mindepth 1 -maxdepth 1 -type d"
+
+if [[ $# -eq 1 ]]; then
+    selected=$1
+else
+    # Use fzf to select from the found directories
+    selected=$(eval "$find_command" | fzf)
+fi
+
+if [[ -z $selected ]]; then
+    exit 0
+fi
+
+selected_name=$(basename "$selected" | tr . _)
+tmux_running=$(pgrep tmux)
+
+# Start tmux session
+if [[ -z $TMUX ]] && [[ -z $tmux_running ]]; then
+    tmux new-session -s $selected_name -c "$selected"
+    exit 0
+fi
+
+# Create a detached session if it doesn't exist
+if ! tmux has-session -t=$selected_name 2> /dev/null; then
+    tmux new-session -ds $selected_name -c "$selected"
+fi
+
+# Switch to the tmux session
+tmux switch-client -t $selected_name

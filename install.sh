@@ -11,6 +11,9 @@ sudo apt-get --yes --force-yes install ripgrep
 sudo apt-get --yes --force-yes install zip
 sudo apt-get --yes --force-yes install nodejs
 sudo apt-get --yes --force-yes install npm
+sudo apt-get --yes --force-yes install tmux
+sudo apt-get --yes --force-yes install fzf
+sudo apt-get --yes --force-yes install npm
 sudo npm install -g --force node@latest
 # Install pre-requisite packages.
 sudo apt-get install --yes --force-yes wget apt-transport-https software-properties-common
@@ -144,3 +147,5 @@ curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
 
 vim +PlugInstall +qall
 nvim +PlugInstall +qall
+
+chmod +x ~/.local/bin/tmux-sessionizer
