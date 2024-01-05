@@ -9,29 +9,31 @@ directories=(
     ~/personal
 )
 
-# Check if directories exist and add them to a new array
+# Check if directories or symbolic links to directories exist and add them to a new array
 existing_directories=()
 for dir in "${directories[@]}"; do
-    if [ -L "$dir" ] && [ -d "$dir" ]; then
+    if [ -d "$dir" ]; then
         existing_directories+=("$dir")
-    elif [ -d "$dir" ]; then
-        existing_directories+=("$dir")
+    elif [ -L "$dir" ]; then
+        link_target=$(readlink -f "$dir")
+        if [ -d "$link_target" ]; then
+            existing_directories+=("$dir -> $link_target")
+        else
+            echo "Symbolic link '$dir' target '$link_target' does not exist."
+        fi
+    else
+        echo "Neither directory nor symbolic link: $dir"
     fi
 done
-# Exit if no directories exist
-if [ ${#existing_directories[@]} -eq 0 ]; then
-    echo "No directories found."
-    exit 1
-fi
 
 # Construct find command with existing directories
-find_command="find ${existing_directories[*]} -mindepth 1 -maxdepth 1 -type d"
-
+#find_command="find ${existing_directories[*]} -mindepth 1 -maxdepth 1 -type d"
+find_command="find ${existing_directories[*]} -mindepth 1 -maxdepth 1 \( -type d -o -type l \)"
 if [[ $# -eq 1 ]]; then
     selected=$1
 else
     # Use fzf to select from the found directories
-    selected=$(eval "$find_command" | fzf)
+    selected=$(eval "$find_command" | fzf -s)
 fi
 
 if [[ -z $selected ]]; then
