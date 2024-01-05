@@ -12,11 +12,12 @@ directories=(
 # Check if directories exist and add them to a new array
 existing_directories=()
 for dir in "${directories[@]}"; do
-    if [ -d "$dir" ]; then
+    if [ -L "$dir" ] && [ -d "$dir" ]; then
+        existing_directories+=("$dir")
+    elif [ -d "$dir" ]; then
         existing_directories+=("$dir")
     fi
 done
-
 # Exit if no directories exist
 if [ ${#existing_directories[@]} -eq 0 ]; then
     echo "No directories found."
