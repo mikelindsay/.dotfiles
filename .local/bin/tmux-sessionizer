@@ -7,7 +7,6 @@ directories=(
     ~/
     ~/work
     ~/personal
-    ~/personal/yt
 )
 
 # Check if directories exist and add them to a new array
