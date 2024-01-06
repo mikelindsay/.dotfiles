@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-
 # Multiline directories array
 directories=(
     ~/work/builds
@@ -8,7 +7,7 @@ directories=(
     ~/work
     ~/personal
 )
-
+#comment
 # Array for excluded directories or symbolic links
 # Add full paths or patterns here
 excluded=(
