@@ -176,7 +176,7 @@ bar {
 	position top
 }
 
-
+bindsym Print exec "flameshot gui"
 
 
 # # Sreen brightness controls
