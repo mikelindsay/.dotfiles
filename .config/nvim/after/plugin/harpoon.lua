@@ -20,6 +20,14 @@ vim.keymap.set(
 
 vim.keymap.set(
     "n",
+    "<M-6>",
+    function()
+        harpoon.ui:toggle_quick_menu(harpoon:list())
+    end
+)
+
+vim.keymap.set(
+    "n",
     "<M-0>",
     function()
         harpoon:list():select(1)
