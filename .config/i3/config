@@ -114,7 +114,7 @@ set $ws5 "5:other 2"
 # switch to workspace
 bindsym $mod+1 workspace $ws1; exec [ $(ps h -C firefox | wc -l) -eq 0 ] && firefox
 bindsym $mod+2 workspace $ws2; exec [ $(ps h -C Discord | wc -l) -eq 0 ] && discord
-bindsym $mod+3 workspace $ws3
+bindsym $mod+3 workspace $ws3; exec [ $(ps h -C bash | wc -l) -eq 0 ] && gnome-terminal
 bindsym $mod+4 workspace number $ws4
 bindsym $mod+5 workspace number $ws5
 #bindsym $mod+6 workspace number $ws3
