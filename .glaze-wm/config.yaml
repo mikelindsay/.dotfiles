@@ -55,10 +55,7 @@ workspaces:
     display_name: "4:other"
     keep_alive: true
   - name: 5
-  - name: 6
-  - name: 7
-  - name: 8
-  - name: 9
+    display_name: "5:other 2"
 
 window_rules:
   # Task Manager requires admin privileges to manage and should be ignored unless running
@@ -88,10 +85,7 @@ window_rules:
 
   - commands: ["set floating", "move to workspace 4", "focus workspace 4"]
     match_process_name: "^(?!.*(?:Taskmgr|ScreenClippingHost|Code|slack|Discord|WindowsTerminal|firefox|TestApp123)).*$"
-  
-  # chrome always in workspace
-  - commands: ["move to workspace 9", "focus workspace 9"]
-    match_process_name: "TestApp123"
+
 keybindings:
   # Shift focus in a given direction.
   - command: "focus left"
@@ -173,14 +167,6 @@ keybindings:
     binding: "Alt+4"
   - command: "focus workspace 5"
     binding: "Alt+5"
-  - command: "focus workspace 6"
-    binding: "Alt+6"
-  - command: "focus workspace 7"
-    binding: "Alt+7"
-  - command: "focus workspace 8"
-    binding: "Alt+8"
-  - command: "focus workspace 9"
-    binding: "Alt+9"
 
   # Move focused window to a workspace defined in `workspaces` config.
   - commands: ["move to workspace 1", "focus workspace 1"]
@@ -193,11 +179,3 @@ keybindings:
     binding: "Alt+Shift+4"
   - commands: ["move to workspace 5", "focus workspace 5"]
     binding: "Alt+Shift+5"
-  - commands: ["move to workspace 6", "focus workspace 6"]
-    binding: "Alt+Shift+6"
-  - commands: ["move to workspace 7", "focus workspace 7"]
-    binding: "Alt+Shift+7"
-  - commands: ["move to workspace 8", "focus workspace 8"]
-    binding: "Alt+Shift+8"
-  - commands: ["move to workspace 9", "focus workspace 9"]
-    bindings: ["Alt+Shift+9"]
