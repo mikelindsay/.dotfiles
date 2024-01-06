@@ -20,28 +20,28 @@ vim.keymap.set(
 
 vim.keymap.set(
     "n",
-    "<F1>",
+    "<M-0>",
     function()
         harpoon:list():select(1)
     end
 )
 vim.keymap.set(
     "n",
-    "<F2>",
+    "<M-9>",
     function()
         harpoon:list():select(2)
     end
 )
 vim.keymap.set(
     "n",
-    "<F3>",
+    "<M-8>",
     function()
         harpoon:list():select(3)
     end
 )
 vim.keymap.set(
     "n",
-    "<F4>",
+    "<M-7>",
     function()
         harpoon:list():select(4)
     end
