@@ -1,3 +1,4 @@
+
 #!/usr/bin/env bash
 
 # Multiline directories array
@@ -9,6 +10,18 @@ directories=(
     ~/personal
 )
 
+# Array for excluded directories or symbolic links
+# Add full paths or patterns here
+excluded=(
+    ~/.cargo
+    ~/.cache
+    # Other paths or patterns to exclude
+)
+
+# Convert the excluded array into a grep-compatible pattern
+exclusion_pattern=$(printf "|%s" "${excluded[@]}")
+exclusion_pattern=${exclusion_pattern:1} # remove leading '|'
+
 # Check if directories or symbolic links to directories exist and add them to a new array
 existing_directories=()
 for dir in "${directories[@]}"; do
@@ -17,23 +30,25 @@ for dir in "${directories[@]}"; do
     elif [ -L "$dir" ]; then
         link_target=$(readlink -f "$dir")
         if [ -d "$link_target" ]; then
-            existing_directories+=("$dir -> $link_target")
-        else
-            echo "Symbolic link '$dir' target '$link_target' does not exist."
+            existing_directories+=("$dir")
         fi
-    else
-        echo "Neither directory nor symbolic link: $dir"
     fi
 done
 
-# Construct find command with existing directories
-#find_command="find ${existing_directories[*]} -mindepth 1 -maxdepth 1 -type d"
-find_command="find ${existing_directories[*]} -mindepth 1 -maxdepth 1 \( -type d -o -type l \)"
+# Construct find command to get directories
+find_command="find ${existing_directories[*]} -mindepth 1 -maxdepth 1 -type d"
+
+# Find symbolic links and check if they point to directories
+symlink_command="find ${existing_directories[*]} -mindepth 1 -maxdepth 1 -type l | while read -r link; do [ -d \"\$(readlink -f \"$link\")\" ] && echo \"$link\"; done"
+
+# Combine results from both find commands and exclude specified paths
+combined_results=$({ eval "$find_command"; eval "$symlink_command"; } | grep -Ev "$exclusion_pattern" | sort -u)
+
+# Use fzf to select from the found directories
 if [[ $# -eq 1 ]]; then
     selected=$1
 else
-    # Use fzf to select from the found directories
-    selected=$(eval "$find_command" | fzf -s)
+    selected=$(echo "$combined_results" | fzf -s)
 fi
 
 if [[ -z $selected ]]; then

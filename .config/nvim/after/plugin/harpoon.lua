@@ -1,5 +1,3 @@
-local actions = require("telescope.actions")
-local action_state = require("telescope.actions.state")
 local harpoon = require("harpoon")
 harpoon:setup({})
 
@@ -36,20 +34,7 @@ require("lualine").setup(
 
 local lspconfig = require("lspconfig")
 local lsp_capabilities = require("cmp_nvim_lsp").default_capabilities()
-
--- require("copilot").setup(
---     {
---         suggestion = {enabled = false, auto_trigger = true},
---         panel = {enabled = false}
---     }
--- )
--- 
--- require("copilot_cmp").setup(
---     {
---         event = {"InsertEnter", "LspAttach"},
---         fix_pairs = true
---     }
--- )
+- )
 -- Set up nvim-cmp.
 local cmp = require "cmp"
 local has_words_before = function()
