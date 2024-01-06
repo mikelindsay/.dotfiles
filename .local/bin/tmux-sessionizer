@@ -39,8 +39,8 @@ done
 find_command="find ${existing_directories[*]} -mindepth 1 -maxdepth 1 -type d"
 
 # Find symbolic links and check if they point to directories
-symlink_command="find ${existing_directories[*]} -mindepth 1 -maxdepth 1 -type l | while read -r link; do [ -d \"\$(readlink -f \"$link\")\" ] && echo \"$link\"; done"
-
+# Find symbolic links and check if they point to directories
+symlink_command="find ${existing_directories[*]} -mindepth 1 -maxdepth 1 -type l -exec bash -c 'target=\"\$(readlink -f \"\$0\")\"; [ -d \"\$target\" ] && echo \"\$0\"' {} \;"
 # Combine results from both find commands and exclude specified paths
 combined_results=$({ eval "$find_command"; eval "$symlink_command"; } | grep -Ev "$exclusion_pattern" | sort -u)
 
