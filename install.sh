@@ -149,3 +149,6 @@ vim +PlugInstall +qall
 nvim +PlugInstall +qall
 
 chmod +x ~/.local/bin/tmux-sessionizer
+
+
+#curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
