@@ -28,9 +28,9 @@ Plug 'hrsh7th/cmp-buffer'
 Plug 'hrsh7th/cmp-path'
 Plug 'hrsh7th/cmp-cmdline'
 Plug 'hrsh7th/nvim-cmp'
-Plug 'zbirenbaum/copilot.lua'
-Plug 'zbirenbaum/copilot-cmp'
-
+"Plug 'zbirenbaum/copilot.lua'
+"Plug 'zbirenbaum/copilot-cmp'
+Plug 'github/copilot.vim'
 Plug 'nvim-lualine/lualine.nvim'
 " If you want to have icons in your statusline choose one of these
 Plug 'nvim-tree/nvim-web-devicons'
