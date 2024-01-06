@@ -14,6 +14,8 @@ sudo apt-get --yes --force-yes install npm
 sudo apt-get --yes --force-yes install tmux
 sudo apt-get --yes --force-yes install fzf
 sudo apt-get --yes --force-yes install npm
+sudo apt-get --yes --force-yes install flameshot
+
 sudo npm install -g --force node@latest
 # Install pre-requisite packages.
 sudo apt-get install --yes --force-yes wget apt-transport-https software-properties-common
