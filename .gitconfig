@@ -5,3 +5,5 @@
 	name = Michael Lindsay
 
 
+[core]
+	autocrlf = true
