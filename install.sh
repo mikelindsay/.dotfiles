@@ -19,7 +19,7 @@ sudo apt-get --yes --force-yes install flameshot
 sudo npm install -g --force node@latest
 # Install pre-requisite packages.
 sudo apt-get install --yes --force-yes wget apt-transport-https software-properties-common
-
+# test
 # Get the version of Ubuntu
 source /etc/os-release
 

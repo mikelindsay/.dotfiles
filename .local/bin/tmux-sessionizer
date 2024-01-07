@@ -46,7 +46,7 @@ expand_symlink() {
         local target
         target=$(resolve_symlink_target "$symlink")
         if [ -n "$target" ]; then
-        	find "$target" -mindepth 1 -maxdepth 2 -type d
+        	find "$target" -mindepth 1 -maxdepth 1 -type d
         fi
     done
     find "$dir" -mindepth 1 -maxdepth 1 -type l -exec bash -c 'target="$(readlink -f "$0")"; [ -d "$target" ] && echo "$0"' {} \; | grep -v '.git'
