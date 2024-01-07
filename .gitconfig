@@ -6,4 +6,4 @@
 
 
 [core]
-	autocrlf = true
+	autocrlf = false
