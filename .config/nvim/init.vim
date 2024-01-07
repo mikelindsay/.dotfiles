@@ -9,7 +9,9 @@ set cursorline
 set signcolumn=yes
 set signcolumn=number
 set nofixendofline
-
+nnoremap <M-w> :bd<CR>:q<CR>
+ 
+nnoremap <C-w> :bd<CR>:q<CR>
 "r Plugins will be downloaded under the specified directory.
 call plug#begin(has('nvim') ? stdpath('data') . '/plugged' : '~/.vim/plugged')
 

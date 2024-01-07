@@ -117,6 +117,7 @@ bindsym $mod+2 workspace $ws2; exec [ $(ps h -C Discord | wc -l) -eq 0 ] && disc
 bindsym $mod+3 workspace $ws3; exec [ $(ps h -C bash | wc -l) -eq 0 ] && gnome-terminal
 bindsym $mod+4 workspace number $ws4
 bindsym $mod+5 workspace number $ws5
+bindsym $mod+6 workspace number $ws3; mode "passthrough_mode" { bindsym Escape mode "default" } bindsym $mod+h exec "i3-msg mode passthrough_mode && sleep 0.2 && xdotool key mod+6 Escape bindsym $mod+j exec "i3-msg mode passthrou
 #bindsym $mod+6 workspace number $ws3
 #bindsym $mod+7 workspace number $ws3
 #bindsym $mod+8 workspace number $ws3

@@ -1,0 +1,43 @@
+#!/bin/bash
+
+# tmux-nster script
+
+ACTION=$1
+KEY=$2
+BASH_COMMANDS=$3
+FILE="$HOME/.tmux-nster-sessions/$KEY"
+
+mkdir -p "$HOME/.tmux-nster-sessions"
+
+case "$ACTION" in
+    SET)
+        # Get the current session name and current path
+        SESSION_NAME=$(tmux display-message -p '#S')
+        CURRENT_PATH=$(tmux display-message -p -F "#{pane_current_path}")
+        # Save them to the file
+        echo "$SESSION_NAME:$CURRENT_PATH:$BASH_COMMANDS" > "$FILE"
+        ;;
+    SWITCH)
+        # Check if the file exists
+        if [ -f "$FILE" ]; then
+            # Read the session name, path, and bash commands
+            IFS=':' read -r SAVED_SESSION SAVED_PATH SAVED_COMMANDS < "$FILE"
+            # Check if the session exists
+            if tmux has-session -t "$SAVED_SESSION" 2>/dev/null; then
+                # Switch to the existing session
+                tmux switch-client -t "$SAVED_SESSION"
+            else
+                # Create a new session with the correct name and path, and run the bash commands
+                TMUX= tmux new-session -d -s "$SAVED_SESSION" -c "$SAVED_PATH"
+#                tmux send-keys -t "$SAVED_SESSION" "$SAVED_COMMANDS" C-m
+                tmux switch-client -t "$SAVED_SESSION"
+            fi
+        else
+        	exit 0
+	fi
+        ;;
+    *)
+        tmux list-sessions | sed -E 's/:.*$//' | grep -v "^$(tmux display-message -p '#S')$" | fzf --reverse | xargs tmux switch-client -t
+        exit 0
+        ;;
+esac
