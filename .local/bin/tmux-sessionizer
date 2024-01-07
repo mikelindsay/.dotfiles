@@ -32,9 +32,9 @@ expand_directory() {
 
 # Function to handle symbolic links
 expand_symlink() {
-    	local dir="$1"
-	find "$dir" -mindepth 1 -maxdepth 3 -type l -exec bash -c 'target="$(readlink -f "$0")"; [ -d "$target" ] && (echo "$target"; ls -d "$target"/*)' {} \; | grep '.git' |  grep -v -e '.git/refs' -e '.git/packed-refs' -e '.git/objects' -e '.git/info' -e '.git/hooks' -e '.git/config' -e '.git/description' -e '.git/branches' -e '.git/HEAD' -e '.git/worktrees'
-        find "$dir" -mindepth 1 -maxdepth 3 -type l -exec bash -c 'target="$(readlink -f "$0")"; [ -d "$target" ] && echo "$0"' {} \; | grep -v '.git'
+local dir="$1"
+find "$dir" -mindepth 1 -maxdepth 3 -type l -exec bash -c 'target="$(readlink -f "$0")"; [ -d "$target" ] && (echo "$target"; ls -d "$target"/* )' {} \; | grep '.git' |  grep -v -e '.git/refs' -e '.git/packed-refs' -e '.git/objects' -e '.git/info' -e '.git/hooks' -e '.git/config' -e '.git/description' -e '.git/branches' -e '.git/HEAD' -e '.git/worktrees'
+find "$dir" -mindepth 1 -maxdepth 1 -type l -exec bash -c 'target="$(readlink -f "$0")"; [ -d "$target" ] && echo "$0"' {} \; | grep -v '.git' 
 }
 
 # Check if directories or symbolic links to directories exist and add them to a new array
