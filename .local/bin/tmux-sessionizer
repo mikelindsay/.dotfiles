@@ -1,11 +1,10 @@
 #!/usr/bin/env bash
 # Multiline directories array
 directories=(
-    ~/work/builds
-    ~/projects
-    ~/
-    ~/work
-    ~/personal
+    ~/.dotfiles/work/repos
+    ~/.dotfiles/projects
+    ~/.dotfiles/work
+    ~/.dotfiles/personal
 )
 #comment
 # Array for excluded directories or symbolic links
@@ -32,9 +31,10 @@ expand_directory() {
 
 # Function to handle symbolic links
 expand_symlink() {
-local dir="$1"
-find "$dir" -mindepth 1 -maxdepth 3 -type l -exec bash -c 'target="$(readlink -f "$0")"; [ -d "$target" ] && (echo "$target"; ls -d "$target"/* )' {} \; | grep '.git' |  grep -v -e '.git/refs' -e '.git/packed-refs' -e '.git/objects' -e '.git/info' -e '.git/hooks' -e '.git/config' -e '.git/description' -e '.git/branches' -e '.git/HEAD' -e '.git/worktrees'
-find "$dir" -mindepth 1 -maxdepth 1 -type l -exec bash -c 'target="$(readlink -f "$0")"; [ -d "$target" ] && echo "$0"' {} \; | grep -v '.git' 
+	local dir="$1"
+	find "$dir" -mindepth 1 -maxdepth 3 -type l -exec bash -c 'target="$(readlink -f "$0")"; [ -d "$target" ] && (echo "$target"; ls -d "$target"/* )' {} \; | grep '.git' |  grep -v -e '.git/refs' -e '.git/packed-refs' -e '.git/objects' -e '.git/info' -e '.git/hooks' -e '.git/config' -e '.git/description' -e '.git/branches' -e '.git/HEAD' -e '.git/worktrees'
+	find "$dir" -mindepth 1 -maxdepth 1 -type l -exec bash -c 'target="$(readlink -f "$0")"; [ -d "$target" ] && echo "$0"' {} \; | grep -v '.git' 
+	find ~/.dotfiles -maxdepth 1 -type d
 }
 
 # Check if directories or symbolic links to directories exist and add them to a new array
