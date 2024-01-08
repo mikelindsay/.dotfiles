@@ -26,11 +26,11 @@ case "$ACTION" in
             if tmux has-session -t "$SAVED_SESSION" 2>/dev/null; then
                 # Switch to the existing session
                 tmux switch-client -t "$SAVED_SESSION"
-            else
+	else
                 # Create a new session with the correct name and path, and run the bash commands
                 TMUX= tmux new-session -d -s "$SAVED_SESSION" -c "$SAVED_PATH"
-#                tmux send-keys -t "$SAVED_SESSION" "$SAVED_COMMANDS" C-m
                 tmux switch-client -t "$SAVED_SESSION"
+		tmux send-keys -t "$SAVED_SESSION" "$SAVED_COMMANDS" C-m
             fi
         else
         	exit 0
