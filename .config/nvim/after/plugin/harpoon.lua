@@ -1,9 +1,13 @@
-    require("auto-session").setup {
-      log_level = "error",
-    }
 local harpoon = require("harpoon")
-harpoon:setup({})
-
+harpoon:setup({
+	settings = {
+		sync_on_ui_close = true,
+		sync_on_ui_toggle = true,
+		key = function()
+			return vim.loop.cwd()
+		    end,
+		},
+})
 vim.keymap.set( "n", "<leader>a", function() harpoon:list():append() end)
 vim.keymap.set( "n", "<C-e>", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end)
 vim.keymap.set( "n", "<M-6>", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end)

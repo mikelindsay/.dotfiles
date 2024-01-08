@@ -23,7 +23,6 @@ Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.5' }
 Plug 'ThePrimeagen/harpoon', { 'branch': 'harpoon2' }
 Plug 'williamboman/mason.nvim'
 Plug 'williamboman/mason-lspconfig.nvim'
-Plug 'rmagatti/auto-session'
 Plug 'neovim/nvim-lspconfig'
 Plug 'hrsh7th/cmp-nvim-lsp'
 Plug 'hrsh7th/cmp-buffer'
