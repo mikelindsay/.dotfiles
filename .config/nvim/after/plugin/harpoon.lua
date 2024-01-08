@@ -1,3 +1,6 @@
+    require("auto-session").setup {
+      log_level = "error",
+    }
 local harpoon = require("harpoon")
 harpoon:setup({})
 
